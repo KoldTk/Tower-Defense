@@ -5,7 +5,8 @@ using UnityEngine;
 
 public enum Event
 {
-
+    Pause, //Bool
+    UnPause, //Bool
 }
 public class EventDispatcher<T>
 {

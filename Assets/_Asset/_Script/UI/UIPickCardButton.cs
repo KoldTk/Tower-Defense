@@ -18,5 +18,6 @@ public class UIPickCardButton : MonoBehaviour
     private void TurnOffCardMenu()
     {
         cardMenu.SetActive(false);
+        EventDispatcher<bool>.Dispatch(Event.UnPause.ToString(), true);
     }    
 }
