@@ -7,13 +7,12 @@ public class MoveState<T> : ICharacterState<T> where T : MonoBehaviour
     private int nextIndex = 1;
     public void Enter(T character)
     { 
+ 
     }
-
     public void Exit(T character)
     {
 
     }
-
     public void Update(T character)
     {
         HandleEnemyMove(character);
@@ -23,7 +22,7 @@ public class MoveState<T> : ICharacterState<T> where T : MonoBehaviour
         if (character is EnemyStateController enemy)
         {
             float moveSpeed = enemy.moveSpeed * Time.deltaTime;
-            character.transform.position = Vector3.MoveTowards(character.transform.position, enemy.movePath[nextIndex], moveSpeed);
+            character.transform.parent.position = Vector3.MoveTowards(character.transform.parent.position, enemy.movePath[nextIndex], moveSpeed);
         }      
     }
     private void LookAtDirection(Vector2 destination, T character)

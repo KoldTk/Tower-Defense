@@ -19,7 +19,7 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < waveInfo.enemyNumber; i++)
         {
             var enemy = Instantiate(waveInfo.enemyPrefab, startPosition, Quaternion.identity);
-            var movement = enemy.GetComponent<EnemyStateController>();
+            var movement = enemy.GetComponentInChildren<EnemyStateController>();
             movement.movePath = waveInfo.movePath;
             movement.moveSpeed = waveInfo.speed;
             startPosition += waveInfo.formationOffset;
