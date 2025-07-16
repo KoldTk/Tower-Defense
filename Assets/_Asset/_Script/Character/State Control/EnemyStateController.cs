@@ -8,8 +8,10 @@ public class EnemyStateController : MonoBehaviour
     private CharacterStateManager<EnemyStateController> stateManager;
     public float moveSpeed;
     public MovePath movePath;
+    public Animator animator;
     void Start()
     {
+        animator = GetComponent<Animator>();
         stateManager = new CharacterStateManager<EnemyStateController>(this);
         stateManager.ChangeState(new MoveState<EnemyStateController>());
     }

@@ -7,8 +7,10 @@ public class AllyStateController : MonoBehaviour
     private const string ENEMY_KEY = "Enemy";
     private CharacterStateManager<AllyStateController> stateManager;
     public int blockCount;
+    public Animator animator;
     void Start()
     {
+        animator = GetComponent<Animator>();
         stateManager = new CharacterStateManager<AllyStateController>(this);
         stateManager.ChangeState(new IdleState<AllyStateController>());
     }
