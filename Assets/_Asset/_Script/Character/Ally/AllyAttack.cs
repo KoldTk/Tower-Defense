@@ -46,13 +46,18 @@ public class AllyAttack : MonoBehaviour
 
         if (attackCooldown <= 0)
         {
-            if (enemiesInRange.Contains(enemy.enemyData))
+            if (enemy != null)
             {
                 Attack();
-                float dmg = DealDamage(enemy.enemyData.defense);
-                enemy.TakeDamage(dmg, enemiesInRange, animator);
-                attackCooldown = 1 / allyData.attackSpeed;
             }
+            else
+            {
+                enemy = target.GetComponent<EnemyInfo>();
+                Attack();
+            }
+            float dmg = DealDamage(enemy.enemyData.defense);
+            enemy.TakeDamage(dmg, enemiesInRange, animator);
+            attackCooldown = 1 / allyData.attackSpeed;
         }
     }
     private void Attack()

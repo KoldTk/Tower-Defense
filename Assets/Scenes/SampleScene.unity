@@ -2980,8 +2980,8 @@ MonoBehaviour:
   spawnInterval: 0
   enemyWaves:
   - enemyPrefab: {fileID: 5979697272610401631, guid: 0ee4e5644c4c9a845bb6aee195ca3d44, type: 3}
-    enemyNumber: 2
-    formationOffset: {x: 5, y: 0, z: 0}
+    enemyNumber: 3
+    formationOffset: {x: 2, y: 0, z: 0}
     movePath: {fileID: 78429158}
     speed: 2
 --- !u!1 &1542691433
