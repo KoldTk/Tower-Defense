@@ -28,7 +28,7 @@ public class UITimer : MonoBehaviour
         if (timer <= 0)
         {
             timer = 10;
-            EventDispatcher<bool>.Dispatch(Event.EnemySpawn.ToString(), true);
+            EventDispatcher<bool>.Dispatch(Event.SpawnEnemy.ToString(), true);
         }    
     }  
 }

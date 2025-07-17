@@ -7,9 +7,13 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float spawnInterval;
     public EnemyWave[] enemyWaves;
     private int currentWave;
-    void Start()
+    private void OnEnable()
     {
-        EventDispatcher<bool>.AddListener(Event.EnemySpawn.ToString(), SpawnEnemy);
+        EventDispatcher<bool>.AddListener(Event.SpawnEnemy.ToString(), SpawnEnemy);
+    }
+    private void OnDisable()
+    {
+        EventDispatcher<bool>.RemoveListener(Event.SpawnEnemy.ToString(), SpawnEnemy);
     }
 
     private void SpawnEnemy(bool isSpawned)
@@ -19,7 +23,7 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < waveInfo.enemyNumber; i++)
         {
             var enemy = Instantiate(waveInfo.enemyPrefab, startPosition, Quaternion.identity);
-            var movement = enemy.GetComponentInChildren<EnemyStateController>();
+            var movement = enemy.GetComponent<EnemyMovement>();
             movement.movePath = waveInfo.movePath;
             movement.moveSpeed = waveInfo.speed;
             startPosition += waveInfo.formationOffset;

@@ -12,4 +12,6 @@ public class EnemyDatabase : ScriptableObject
     public float strength;
     public float attackSpeed;
     public float movementSpeed;
+    public float expDrop;
+    public int goldDrop;
 }

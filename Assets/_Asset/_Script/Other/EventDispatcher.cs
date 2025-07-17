@@ -5,9 +5,11 @@ using UnityEngine;
 
 public enum Event
 {
-    OnPause, //Bool
-    OnUnPause, //Bool
-    EnemySpawn, //Bool
+    Pause, //bool
+    Continue, //bool
+    SpawnEnemy, //bool
+    GainExp, //float
+    GainGold, // int
 }
 public class EventDispatcher<T>
 {

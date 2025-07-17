@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 01
   characterName: Horse
-  health: 50
+  health: 20
   defense: 5
   strength: 5
   attackSpeed: 3
   movementSpeed: 15
+  expDrop: 20
+  goldDrop: 5
