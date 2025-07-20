@@ -2984,6 +2984,16 @@ MonoBehaviour:
     formationOffset: {x: 2, y: 0, z: 0}
     movePath: {fileID: 78429158}
     speed: 2
+  - enemyPrefab: {fileID: 5979697272610401631, guid: 0ee4e5644c4c9a845bb6aee195ca3d44, type: 3}
+    enemyNumber: 3
+    formationOffset: {x: 2, y: 0, z: 0}
+    movePath: {fileID: 51563873}
+    speed: 2
+  - enemyPrefab: {fileID: 5979697272610401631, guid: 0ee4e5644c4c9a845bb6aee195ca3d44, type: 3}
+    enemyNumber: 3
+    formationOffset: {x: 2, y: 0, z: 0}
+    movePath: {fileID: 470953760}
+    speed: 2
 --- !u!1 &1542691433
 GameObject:
   m_ObjectHideFlags: 0
@@ -4063,8 +4073,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5382d7a3925c674c9be9758a13425c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
   allyData: {fileID: 11400000, guid: 9e9d9d4ba401a9f44a21e077a759ade1, type: 2}
+  arrowPrefab: {fileID: 294059802949520460, guid: bcf8a7ed70d3c894f962039210581db6, type: 3}
+  arrowPoolSize: 5
 --- !u!58 &2074992902
 CircleCollider2D:
   m_ObjectHideFlags: 0

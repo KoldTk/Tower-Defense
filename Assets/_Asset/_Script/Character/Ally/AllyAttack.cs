@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class AllyAttack : MonoBehaviour
 {
     private const string ENEMY_KEY = "Enemy";
-    public Animator animator;
+    private Animator animator;
     public AllyDatabase allyData;
     private List<EnemyDatabase> enemiesInRange = new();
     private float attackCooldown;
-    
+    [SerializeField] private GameObject arrowPrefab;
+    public Queue<GameObject> arrowPool = new Queue<GameObject>();
+    [SerializeField] private int arrowPoolSize = 5;
+    private ArrowControl arrowControl;
     void Start()
     {
+        SpawnArrow();
         animator = GetComponent<Animator>();
         attackCooldown = 1 / allyData.attackSpeed;
     }
@@ -27,48 +30,59 @@ public class AllyAttack : MonoBehaviour
     {
         if (!target.CompareTag(ENEMY_KEY)) return;
 
-        var enemy = target.GetComponent<EnemyInfo>();
-        if (!enemiesInRange.Contains(enemy.enemyData))
+        EnemyInfo enemyInfo = target.GetComponent<EnemyInfo>();
+        if (!enemiesInRange.Contains(enemyInfo.enemyData))
         {
-            enemiesInRange.Add(enemy.enemyData);
+            enemiesInRange.Add(enemyInfo.enemyData);
         }
     }
     private void OnTriggerExit2D(Collider2D target)
     {
         if (!target.CompareTag(ENEMY_KEY)) return;
 
-        var enemy = target.GetComponent<EnemyInfo> ();
-        enemiesInRange.Remove(enemy.enemyData);
+        EnemyInfo enemyInfo = target.GetComponent<EnemyInfo> ();
+        enemiesInRange.Remove(enemyInfo.enemyData);
     }
     private void OnTriggerStay2D(Collider2D target)
     {
-        var enemy = target.GetComponent<EnemyInfo>();
+        EnemyInfo enemyInfo = target.GetComponent<EnemyInfo>();
 
         if (attackCooldown <= 0)
         {
-            if (enemy != null)
+            if (enemyInfo != null)
             {
-                Attack();
+                Attack(enemyInfo);
             }
             else
             {
-                enemy = target.GetComponent<EnemyInfo>();
-                Attack();
+                enemyInfo = target.GetComponent<EnemyInfo>();
+                Attack(enemyInfo);
             }
-            float dmg = DealDamage(enemy.enemyData.defense);
-            enemy.TakeDamage(dmg, enemiesInRange, animator);
+            DealDamage(enemyInfo);
             attackCooldown = 1 / allyData.attackSpeed;
         }
     }
-    private void Attack()
+    private void Attack(EnemyInfo enemy)
     {
         animator.SetTrigger("Attack");
-        Debug.Log("Attack");
+        GameObject arrow = arrowPool.Dequeue();
+        arrowControl = arrow.GetComponent<ArrowControl>();
+        arrowControl.enemyPos = enemy.transform.position;
+        arrow.SetActive(true);
     }  
-    private float DealDamage(float enemyDefense)
+    public void DealDamage(EnemyInfo enemy)
     {
-        float damageDeal = allyData.strength - enemyDefense;
+        float damageDeal = allyData.strength - enemy.enemyData.defense;
         damageDeal = Mathf.Clamp(damageDeal, 1, allyData.strength);
-        return damageDeal;
+        enemy.TakeDamage(damageDeal, enemiesInRange, animator);
+    } 
+    private void SpawnArrow()
+    {
+        for (int i = 0; i < arrowPoolSize; i++)
+        {
+            GameObject arrow = Instantiate(arrowPrefab, transform.position, transform.rotation, transform);
+            arrow.SetActive(false);
+            arrowPool.Enqueue(arrow);
+        }
     }    
 }
