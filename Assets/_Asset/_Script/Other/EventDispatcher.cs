@@ -10,6 +10,7 @@ public enum Event
     SpawnEnemy, //bool
     GainExp, //float
     GainGold, // int
+    EnemyDie,
 }
 public class EventDispatcher<T>
 {

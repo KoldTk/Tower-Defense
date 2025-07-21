@@ -12,11 +12,6 @@ public class EnemyInfo : MonoBehaviour
     {
         currentHealth = enemyData.health;
     }
-    private void OnDestroy()
-    {
-
-    }
-
     public void TakeDamage(float damage, List<EnemyDatabase> enemyInRange, Animator allyAnimator)
     {
         currentHealth -= damage;

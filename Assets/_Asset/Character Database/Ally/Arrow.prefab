@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8648510771864792433
 Transform:
   m_ObjectHideFlags: 0
@@ -97,5 +97,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d8ec62a1c02992408f2ba4bdf57133c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPos: {x: 0, y: 0, z: 0}
-  arrowSpeed: 15
