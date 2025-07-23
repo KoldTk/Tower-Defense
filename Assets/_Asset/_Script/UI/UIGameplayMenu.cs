@@ -20,8 +20,9 @@ public class UIGameplayMenu : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero);
             if (hit.collider != null && hit.collider.CompareTag("Waypoint"))
             {
+                GameManager.Instance.spawnAllyPos = hit.collider.transform.position;
                 OpenSpawnMenu(Input.mousePosition);
-            }else if (spawnMenu.gameObject.activeInHierarchy)
+            }else if (spawnMenu.gameObject.activeInHierarchy && !EventSystem.current.IsPointerOverGameObject())
             {
                 spawnMenu.gameObject.SetActive(false);
             }    
@@ -29,17 +30,6 @@ public class UIGameplayMenu : MonoBehaviour
     }    
     private void OpenSpawnMenu(Vector2 screenPos)
     {
-        Vector2 anchoredPos;
-        bool success = RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            gameplayUI.transform as RectTransform,
-            screenPos,
-            gameplayUI.renderMode == RenderMode.ScreenSpaceOverlay ? null : gameplayUI.worldCamera,
-            out anchoredPos
-            );
-        if (success && !spawnMenu.gameObject.activeInHierarchy)
-        {
-            spawnMenu.anchoredPosition = anchoredPos;
-            spawnMenu.gameObject.SetActive(true);
-        }
+        spawnMenu.gameObject.SetActive(true);
     }
 }

@@ -54,6 +54,7 @@ public class AllyControl : MonoBehaviour
             if (enemyInfo != null)
             {
                 Attack(enemyInfo);
+                
             }
             else
             {
@@ -65,8 +66,8 @@ public class AllyControl : MonoBehaviour
     }
     private void Attack(EnemyInfo enemy)
     {
+        RotateCharacterToAttack(enemy);
         animator.SetTrigger("Attack");
-        RotateCharacter(enemy);
         ShootArrow(enemy.transform, arrowSpeed);
         SetCharacterToDefault();
     }  
@@ -87,20 +88,29 @@ public class AllyControl : MonoBehaviour
             arrow.SetActive(false);
         }
     }
-    private void RotateCharacter(EnemyInfo target)
+    private void RotateCharacterToAttack(EnemyInfo target)
     {
         Vector2 direction = (target.transform.position - transform.position).normalized;
 
         float dotRight = Vector2.Dot(direction, Vector2.right);
         float dotUp = Vector2.Dot(direction, Vector2.up);
-        if (Mathf.Abs(dotRight) > Mathf.Abs(dotUp))
+        if (Mathf.Abs(dotRight * 0.7f) > Mathf.Abs(dotUp))
         {
             transform.localScale = new Vector3(2 * Mathf.Sign(dotRight), 2f, 2f);
+            animator.SetInteger("Direction", 0);
         }
         else
         {
-            Debug.Log("Attack Enemy Down");
-        }  
+            if (dotUp > 0)
+            {
+                animator.SetInteger("Direction", 1);
+            }
+            else
+            {
+                animator.SetInteger("Direction", 2);
+            }
+        }
+
     }
     private void SetCharacterToDefault()
     {
@@ -108,5 +118,6 @@ public class AllyControl : MonoBehaviour
         {
             transform.localScale = originalScale;
         }    
-    }    
+    }
+    
 }

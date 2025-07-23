@@ -8,6 +8,7 @@ public enum Event
     Pause, //bool
     Continue, //bool
     SpawnEnemy, //bool
+    SpawnAlly, //string
     GainExp, //float
     GainGold, // int
     EnemyDie,

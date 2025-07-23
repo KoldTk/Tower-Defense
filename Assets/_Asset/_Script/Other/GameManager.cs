@@ -9,6 +9,7 @@ public class GameManager : Singleton<GameManager>
     public bool enemyIsSpawning;
     public float currentExp;
     public int currentGold;
+    public Vector2 spawnAllyPos;
     private void Awake()
     {
         GameStartSetup();
